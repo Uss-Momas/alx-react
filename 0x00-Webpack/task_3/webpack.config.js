@@ -1,16 +1,34 @@
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     mode: 'development',
-    entry: './js/dashboard_main.js',
+    entry: {
+        header: path.resolve(__dirname, './modules/header/header.js'),
+        body: path.resolve(__dirname, './modules/body/body.js'),
+        footer: path.resolve(__dirname, './modules/footer/footer.js'),
+    },
     output: {
         path: path.resolve(__dirname, 'public'),
-        filename: 'bundle.js'
+        filename: '[name].bundle.js'
     },
     // performance: {
     //     maxAssetSize: 1000000,
     //     maxEntrypointSize: 1000000,
     // },
+    devServer: {
+        static: {
+            directory: path.join(__dirname, 'public'),
+        },
+        compress: true,
+        port: 8564,
+    },
+    plugins: [
+        new HtmlWebpackPlugin(),
+        new CleanWebpackPlugin(),
+    ],
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {
@@ -50,4 +68,5 @@ module.exports = {
             }
         ]
     }
+
 }
