@@ -21,6 +21,7 @@ module.exports = {
         static: {
             directory: path.join(__dirname, 'public'),
         },
+        contentBase: './public',
         compress: true,
         port: 8564,
     },
