@@ -17,6 +17,11 @@ module.exports = {
     //     maxAssetSize: 1000000,
     //     maxEntrypointSize: 1000000,
     // },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        },
+    },
     devServer: {
         static: {
             directory: path.join(__dirname, 'public'),
