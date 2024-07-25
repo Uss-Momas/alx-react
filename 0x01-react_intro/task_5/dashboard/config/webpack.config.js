@@ -1,6 +1,6 @@
-import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 
 module.exports = {
@@ -13,19 +13,26 @@ module.exports = {
   devServer: {
     hot: true,
     compress: true,
-    port: 9000,
+    port: 8564,
     static: {
       directory: path.resolve(__dirname, '../dist'),
     },
   },
-  plugins: [
-    new HtmlWebpackPlugin(), new CleanWebpackPlugin(),
-  ],
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
+  resolve: {
+    extensions: [".*", ".js", ".jsx"],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      name: "index.html",
+      inject: false,
+      template: "./dist/index.html",
+    }),
+  ],
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'all',
+  //   },
+  // },
   module: {
     rules: [
       {
