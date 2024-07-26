@@ -1,0 +1,16 @@
+.App-body p {
+    margin-bottom: 1.5rem;
+}
+
+.App-body label {
+    margin-right: .5rem;
+}
+
+.App-body label:last-of-type {
+    margin-left: .5rem;
+}
+
+.App-body button {
+    margin: 0 1rem;
+    padding: 0 .5rem;
+}
