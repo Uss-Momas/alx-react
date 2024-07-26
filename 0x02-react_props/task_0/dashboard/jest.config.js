@@ -14,7 +14,7 @@ const config = {
   verbose: true,
   setupFiles: ['<rootDir>/src/setupTests.js'],
   moduleNameMapper: {
-    "\\.(css|sass)$": "identity-obj-proxy",
+    "\\.(css|sass|gif|png|jpe?g|svg|ico)$": "identity-obj-proxy",
   },
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
