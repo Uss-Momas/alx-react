@@ -12,7 +12,7 @@ const config = {
   moduleFileExtensions: ['js', 'json', 'jsx'],
 
   verbose: true,
-  setupFiles: ['<rootDir>/setupTests.js'],
+  setupFiles: ['<rootDir>/src/setupTests.js'],
   moduleNameMapper: {
     "\\.(css|sass)$": "identity-obj-proxy",
   },
