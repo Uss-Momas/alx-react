@@ -9,10 +9,14 @@ describe('<Notifications /> Component Test cases', () => {
     });
 
     it('verify that Notifications renders three list items', () => {
-        expect(notifications.find('li').length).toEqual(3);
+        expect(notifications.find('NotificationItem').length).toEqual(3);
     });
 
     it('verify that Notifications renders the text Here is the list of notifications', () => {
         expect(notifications.find('p').text()).toMatch('Here is the list of notifications');
+    });
+
+    it('Verify the first NotificationItem renders correct html', () => {
+        expect(notifications.find('NotificationItem').first().html()).toMatch("<li data-notification-type=\"default\">New course available</li>")
     });
 });

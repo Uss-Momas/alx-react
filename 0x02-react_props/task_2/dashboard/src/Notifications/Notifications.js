@@ -2,9 +2,9 @@ import React from 'react';
 import './Notifications.css';
 import { getLatestNotification } from '../utils/utils';
 import closeIcon from '../assets/close-icon.png';
+import NotificationItem from './NotificationItem';
 
 export default function Notifications() {
-  const createLatestNotification = () => { return { __html: getLatestNotification() }; }
   const handleClick = (event) => {
     console.log("Close button has been clicked");
   }
@@ -13,9 +13,9 @@ export default function Notifications() {
       <div>
         <p>Here is the list of notifications</p>
         <ul>
-          <li data-priority="default">New course available</li>
-          <li data-priority="urgent">New resume available</li>
-          <li data-priority="urgent" dangerouslySetInnerHTML={createLatestNotification()}></li>
+          <NotificationItem type="default" value="New course available" />
+          <NotificationItem type="urgent" value="New resume available" />
+          <NotificationItem type="urgent" html={getLatestNotification()} />
         </ul>
       </div>
       <button aria-label='Close' onClick={handleClick}>

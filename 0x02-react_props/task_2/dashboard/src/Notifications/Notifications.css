@@ -1,8 +1,8 @@
-[data-priority="default"] {
+[data-notification-type="default"] {
     color: blue;
 }
 
-[data-priority="urgent"] {
+[data-notification-type="urgent"] {
     color: red;
 }
 
