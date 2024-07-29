@@ -7,9 +7,7 @@ import Notifications from '../Notifications/Notifications';
 import { PropTypes } from 'prop-types';
 
 
-function App() {
-
-  let isLoggedIn = false;
+function App({isLoggedIn = false}) {
 
   return (
     <>

@@ -5,6 +5,7 @@ export default function CourseList() {
         <table id="CourseList">
             <thead>
                 <CourseListRow textFirstCell="Available courses" isHeader={true} />
+                <CourseListRow textFirstCell="Course name" textSecondCell="Credit" isHeader={true} />
             </thead>
             <tbody>
                 <CourseListRow textFirstCell="ES6" textSecondCell="60" and isHeader={false} />

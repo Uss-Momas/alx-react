@@ -14,7 +14,7 @@ describe('Tests fro NotificationItem component', () => {
     });
 
     it('Test passing dummy html to component', () => {
-        notificationItem.setProps({ html: '<u>test</u>' });
+        notificationItem.setProps({ html: { __html: '<u>test</u>' } });
         expect(notificationItem.html()).toMatch("<li data-notification-type=\"urgent\"><u>test</u></li>");
     });
 });
