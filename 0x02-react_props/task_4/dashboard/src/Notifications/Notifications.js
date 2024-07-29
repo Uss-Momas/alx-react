@@ -12,21 +12,21 @@ function Notifications({ displayDrawer = true }) {
   return (
     <>
       <div className="menuItem">
-        Your notifications
+        <span className='my-notifications'>Your notifications</span>
+        {displayDrawer && (<div className="Notifications">
+          <div>
+            <p>Here is the list of notifications</p>
+            <ul>
+              <NotificationItem type="default" value="New course available" />
+              <NotificationItem type="urgent" value="New resume available" />
+              <NotificationItem type="urgent" html={{ __html: getLatestNotification() }} />
+            </ul>
+          </div>
+          <button aria-label='Close' onClick={handleClick}>
+            <img src={closeIcon} alt="close-icon.png" />
+          </button>
+        </div>)}
       </div>
-      {displayDrawer && (<div className="Notifications">
-        <div>
-          <p>Here is the list of notifications</p>
-          <ul>
-            <NotificationItem type="default" value="New course available" />
-            <NotificationItem type="urgent" value="New resume available" />
-            <NotificationItem type="urgent" html={{ __html: getLatestNotification() }} />
-          </ul>
-        </div>
-        <button aria-label='Close' onClick={handleClick}>
-          <img src={closeIcon} alt="close-icon.png" />
-        </button>
-      </div>)}
     </>
   );
 }

@@ -1,3 +1,4 @@
+import './CourseList.css';
 import CourseListRow from './CourseListRow';
 
 export default function CourseList() {

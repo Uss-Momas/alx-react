@@ -7,13 +7,15 @@ import Notifications from '../Notifications/Notifications';
 import { PropTypes } from 'prop-types';
 
 
-function App({isLoggedIn = false}) {
+function App({ isLoggedIn = false }) {
 
   return (
     <>
-      <Notifications />
       <div className="App">
-        <Header />
+        <div className='headerContainer'>
+          <Header />
+          <Notifications />
+        </div>
         <div className="App-body">
           {
             !isLoggedIn ? <Login /> : <CourseList />

@@ -1,5 +1,10 @@
 .App-body p {
     margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+}
+
+.App-body label:first-of-type {
+    margin-left: 1.5rem;
 }
 
 .App-body label {

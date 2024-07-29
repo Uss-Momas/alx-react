@@ -20,7 +20,12 @@ body {
     height: 100%;
 }
 
+div.headerContainer {
+    display: flex;
+    border-bottom: .18rem solid var(--color-primary-alternative);
+    justify-content: space-between;
+}
+
 .App-body {
     margin-top: 3rem;
-    margin-left: 2.5rem;
 }
