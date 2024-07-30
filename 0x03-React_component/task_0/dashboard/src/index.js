@@ -6,6 +6,6 @@ const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 root.render(
   <React.StrictMode>
-    <App isLoggedIn={true}/>
+    <App isLoggedIn={false}/>
   </React.StrictMode>
 );
