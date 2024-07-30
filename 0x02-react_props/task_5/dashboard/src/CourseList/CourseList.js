@@ -1,7 +1,9 @@
 import './CourseList.css';
 import CourseListRow from './CourseListRow';
+import CourseShape from './CourseShape';
+import PropTypes from 'prop-types';
 
-export default function CourseList() {
+function CourseList({ listCourses = [] }) {
     return (
         <table id="CourseList">
             <thead>
@@ -9,10 +11,21 @@ export default function CourseList() {
                 <CourseListRow textFirstCell="Course name" textSecondCell="Credit" isHeader={true} />
             </thead>
             <tbody>
-                <CourseListRow textFirstCell="ES6" textSecondCell="60" and isHeader={false} />
-                <CourseListRow textFirstCell="Webpack" textSecondCell="20" and isHeader={false} />
-                <CourseListRow textFirstCell="React" textSecondCell="40" and isHeader={false} />
+                {
+                    listCourses.length > 0 ? listCourses.map(({ id, name, credit }) => {
+                        return <CourseListRow key={id} textFirstCell={name} textSecondCell={credit} isHeader={false} />
+                    }) : (
+                        <CourseListRow textFirstCell="No course available yet" />
+                    )
+                }
             </tbody>
         </table>
     );
 }
+
+
+CourseList.propTypes = {
+    listCourses: PropTypes.arrayOf(PropTypes.shape(CourseShape)),
+}
+
+export default CourseList;

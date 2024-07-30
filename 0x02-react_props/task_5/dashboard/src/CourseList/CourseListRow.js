@@ -1,4 +1,6 @@
-export default function CourseListRow({ isHeader, textFirstCell, textSecondCell }) {
+import PropTypes from "prop-types";
+
+function CourseListRow({ isHeader, textFirstCell, textSecondCell }) {
     if (isHeader) {
         if (textSecondCell) return (<tr> <th>{textFirstCell}</th> <th>{textSecondCell}</th></tr>);
         return (<tr> <th colSpan={2}>{textFirstCell}</th> </tr>);
@@ -10,3 +12,16 @@ export default function CourseListRow({ isHeader, textFirstCell, textSecondCell 
         </tr>
     );
 }
+
+CourseListRow.propTypes = {
+    isHeader: PropTypes.bool,
+    textFirstCell: PropTypes.string.isRequired,
+    textSecondCell: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+}
+
+CourseListRow.defaultProps = {
+    isHeader: false,
+    textSecondCell: null,
+};
+
+export default CourseListRow;
