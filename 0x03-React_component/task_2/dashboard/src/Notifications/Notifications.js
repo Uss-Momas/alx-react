@@ -1,11 +1,11 @@
 import React from 'react';
 import closeIcon from '../assets/close-icon.png';
 import './Notifications.css';
-import { getLatestNotification } from '../utils/utils';
 import NotificationItem from './NotificationItem';
+import NotificationItemShape from './NotificationItemShape';
 import PropTypes from 'prop-types';
 
-function Notifications({ displayDrawer = true }) {
+function Notifications({ displayDrawer = true, listNotifications = [] }) {
   const handleClick = (event) => {
     console.log("Close button has been clicked");
   }
@@ -17,9 +17,11 @@ function Notifications({ displayDrawer = true }) {
           <div>
             <p>Here is the list of notifications</p>
             <ul>
-              <NotificationItem type="default" value="New course available" />
-              <NotificationItem type="urgent" value="New resume available" />
-              <NotificationItem type="urgent" html={{ __html: getLatestNotification() }} />
+              {
+                listNotifications.length > 0 ? listNotifications.map(({ id, type, html, value }) => {
+                  return <NotificationItem key={id} type={type} html={html} value={value} />
+                }) : (<NotificationItem value="No new notification for now" />)
+              }
             </ul>
           </div>
           <button aria-label='Close' onClick={handleClick}>
@@ -33,6 +35,7 @@ function Notifications({ displayDrawer = true }) {
 
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
+  listNotifications: PropTypes.arrayOf(PropTypes.shape(NotificationItemShape)),
 }
 
 export default Notifications;
