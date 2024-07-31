@@ -1,12 +1,28 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 
-function NotificationItem({ type = 'default', value, html }) {
-    const element = html ?
-        <li data-notification-type="urgent" dangerouslySetInnerHTML={html}></li> :
-        <li data-notification-type={type} >{value}</li>;
+class NotificationItem extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-    return element;
+    render() {
+        const element = this.props.html ?
+            <li data-notification-type="urgent" dangerouslySetInnerHTML={this.props.html} onClick={() => { this.props.markAsRead(this.props.id) }}></li> :
+            <li data-notification-type={this.props.type} onClick={() => { this.props.markAsRead(this.props.id) }}>{this.props.value}</li>;
+
+        return element;
+    }
 }
+
+
+// function NotificationItem({ type = 'default', value, html, markAsRead, id = 0 }) {
+//     const element = html ?
+//         <li data-notification-type="urgent" dangerouslySetInnerHTML={html} onClick={() => { markAsRead(id) }}></li> :
+//         <li data-notification-type={type} onClick={() => { markAsRead(id) }}>{value}</li>;
+
+//     return element;
+// }
 
 NotificationItem.propTypes = {
     type: PropTypes.string,
@@ -14,10 +30,13 @@ NotificationItem.propTypes = {
     html: PropTypes.shape({
         __html: PropTypes.string,
     }),
+    markAsRead: PropTypes.func,
+    id: PropTypes.number
 }
 
-// NotificationItem.defaultProps = {
-//     type: 'default'
-// } //  will be removed in the future, use JS default parameters instead
+NotificationItem.defaultProps = {
+    type: 'default',
+    id: 0,
+} //  will be removed in the future, use JS default parameters instead
 
 export default NotificationItem;

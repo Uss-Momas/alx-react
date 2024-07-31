@@ -9,6 +9,11 @@ import PropTypes from 'prop-types';
 class Notifications extends React.Component {
   constructor(props) {
     super(props);
+    this.markAsRead = this.markAsRead.bind(this);
+  }
+
+  markAsRead(id) {
+    console.log(`Notification ${id} has been marked as read`);
   }
 
   render() {
@@ -26,7 +31,7 @@ class Notifications extends React.Component {
                 <ul>
                   {
                     this.props.listNotifications.length > 0 ? this.props.listNotifications.map(({ id, type, html, value }) => {
-                      return <NotificationItem key={id} type={type} html={html} value={value} />
+                      return <NotificationItem key={id} type={type} html={html} value={value} markAsRead={this.markAsRead} id={id} />
                     }) : (<NotificationItem value="No new notification for now" />)
                   }
                 </ul>
