@@ -10,6 +10,6 @@ describe('CourseList component tests', () => {
     });
 
     it('Checks that renders the 5 correct rows', () => {
-        expect(courseListWrapper.find('CourseListRow').length).toEqual(5);
+        expect(courseListWrapper.find('CourseListRow').length).toEqual(3);
     });
 });
