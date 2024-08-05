@@ -1,0 +1,17 @@
+table {
+    margin: 0 auto;
+    border: 1px solid #d4d4d4;
+    width: 80%;
+}
+
+th {
+    border-bottom: 1.5px solid #cecece;
+}
+
+tr{
+    padding: 1rem;
+}
+
+tr:nth-child(2) {
+    text-align: left;
+}
