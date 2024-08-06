@@ -1,9 +1,51 @@
+import './Notifications.css';
+import { StyleSheet, css } from 'aphrodite';
 import React from 'react';
 import closeIcon from '../assets/close-icon.png';
-import './Notifications.css';
 import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape';
 import PropTypes from 'prop-types';
+
+const styles = StyleSheet.create({
+  Notifications: {
+    border: '1px dashed #E0354B',
+    marginTop: '.58rem',
+    padding: '1rem',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+  },
+  ul: {
+    margin: '1rem 2rem'
+  },
+  button: {
+    ':hover': {
+      cursor: 'pointer',
+    },
+    backgroundColor: 'white',
+    border: '0',
+  },
+  img: {
+    width: '15px',
+    height: '15px',
+  },
+  menuItem: {
+    marginTop: '.7rem',
+    marginBottom: '2.4rem',
+    marginRight: '1.5rem',
+  },
+  'my-notifications': {
+    textAlign: "right",
+  },
+
+  '[data-notification-type="default"]': {
+    color: "blue",
+  },
+  '[data-notification-type="urgent"]': {
+    color: "red",
+  },
+});
+
 
 
 class Notifications extends React.Component {
@@ -26,13 +68,13 @@ class Notifications extends React.Component {
     }
     return (
       <>
-        <div className="menuItem">
-          <span className='my-notifications'>Your notifications</span>
+        <div className={css(styles.menuItem)}>
+          <span className={css(styles['my-notifications'])} >Your notifications</span>
           {
-            this.props.displayDrawer && (<div className="Notifications">
+            this.props.displayDrawer && (<div className={css(styles.Notifications)}>
               <div>
                 <p>Here is the list of notifications</p>
-                <ul>
+                <ul className={css(styles.ul)}>
                   {
                     this.props.listNotifications.length > 0 ? this.props.listNotifications.map(({ id, type, html, value }) => {
                       return <NotificationItem key={id} type={type} html={html} value={value} markAsRead={this.markAsRead} id={id} />
@@ -40,8 +82,8 @@ class Notifications extends React.Component {
                   }
                 </ul>
               </div>
-              <button aria-label='Close' onClick={handleClick}>
-                <img src={closeIcon} alt="close-icon.png" />
+              <button className={css(styles.button)} aria-label='Close' onClick={handleClick}>
+                <img className={css(styles.img)} src={closeIcon} alt="close-icon.png" />
               </button>
             </div>)
           }
