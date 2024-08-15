@@ -1,26 +1,27 @@
-import { shallow } from "enzyme";
+import React from 'react';
+import { StyleSheetTestUtils } from 'aphrodite';
 import Header from './Header';
+import { shallow } from 'enzyme';
 
-const header = shallow(<Header />);
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
 
-describe('Testing the Header component', () => {
-    it('Verify if the Header renders without errors', () => {
-        expect(header).toBeDefined();
-    });
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
-    it('Verify if renders the img tag', () => {
-        expect(header.find('img').exists()).toEqual(true);
-    });
+describe('rendering components', () => {
+  it('renders Header component without crashing', () => {
+    const wrapper = shallow(<Header />);
 
-    it('Verify if renders 1 img tag', () => {
-        expect(header.find('img').length).toEqual(1);
-    });
+    expect(wrapper.exists()).toBe(true);
+  });
 
-    it('Verify if renders the h1 tag', () => {
-        expect(header.find('h1').exists()).toEqual(true);
-    });
+  it('Header renders img and h1 tags', () => {
+    const wrapper = shallow(<Header />);
 
-    it('Verify if renders 1 h1 tag', () => {
-        expect(header.find('h1').length).toEqual(1);
-    });
+    expect(wrapper.exists('img')).toBe(true);
+    expect(wrapper.exists('h1')).toBe(true);
+  })
 });

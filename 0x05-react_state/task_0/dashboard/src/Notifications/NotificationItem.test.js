@@ -1,20 +1,45 @@
-import { shallow } from "enzyme";
+import React from 'react';
+import { StyleSheetTestUtils } from 'aphrodite';
 import NotificationItem from './NotificationItem';
+import { shallow } from 'enzyme';
 
-const notificationItem = shallow(<NotificationItem />);
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
 
-describe('Tests fro NotificationItem component', () => {
-    it('Test component rendering without crashing', () => {
-        expect(notificationItem).toBeDefined();
-    });
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
-    it('Test passing dummy type and value to component', () => {
-        notificationItem.setProps({ type: "default", value: "test" });
-        expect(notificationItem.html()).toMatch("<li data-notification-type=\"default\">test</li>");
-    });
+describe('rendering components', () => {
+  it('renders NotificationItem component without crashing', () => {
+    const wrapper = shallow(<NotificationItem />);
 
-    it('Test passing dummy html to component', () => {
-        notificationItem.setProps({ html: { __html: '<u>test</u>' } });
-        expect(notificationItem.html()).toMatch("<li data-notification-type=\"urgent\"><u>test</u></li>");
-    });
+    expect(wrapper.exists()).toBe(true);
+  });
+
+  it('renders correct html from type="default" value="test" props', () => {
+    const wrapper = shallow(<NotificationItem />);
+
+    wrapper.setProps({ type: 'default', value: 'test' })
+    expect(wrapper.html()).toEqual('<li data-notification-type=\"default\" class=\"default_peoly4\">test</li>');
+  });
+
+  it('renders correct html from  html="<u>test</u>" props', () => {
+    const wrapper = shallow(<NotificationItem />);
+
+    wrapper.setProps({ html: '<u>test</u>' })
+    expect(wrapper.html()).toEqual('<li data-urgent=\"true\" class=\"urgent_5sww4x\"><u>test</u></li>');
+  })
+
+  it('checks component onClick spy is called with correct ID argument', () => {
+    const wrapper = shallow(<NotificationItem />);
+    const spy = jest.fn();
+
+    wrapper.setProps({ value: 'test', markAsRead: spy, id: 99 })
+    wrapper.find('li').props().onClick();
+    expect(spy).toBeCalledTimes(1);
+    expect(spy).toBeCalledWith(99);
+    spy.mockRestore();
+  })
 });
