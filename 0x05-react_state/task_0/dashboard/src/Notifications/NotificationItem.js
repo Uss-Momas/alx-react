@@ -1,42 +1,64 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import { StyleSheet, css } from 'aphrodite';
 import PropTypes from 'prop-types';
 
-class NotificationItem extends React.PureComponent {
-    constructor(props) {
-        super(props);
-    }
 
-    render() {
-        const element = this.props.html ?
-            <li data-notification-type="urgent" dangerouslySetInnerHTML={this.props.html} onClick={() => { this.props.markAsRead(this.props.id) }}></li> :
-            <li data-notification-type={this.props.type} onClick={() => { this.props.markAsRead(this.props.id) }}>{this.props.value}</li>;
-
-        return element;
-    }
+class NotificationItem extends PureComponent {
+  render() {
+    const { type, value, html, markAsRead, id } = this.props;
+    return (
+      <>
+        {value
+          ? <li
+            data-notification-type={type}
+            onClick={() => markAsRead(id)}
+            className={type === 'default' ? css(styles.default) : css(styles.urgent)}
+          >{value}
+          </li>
+          : null
+        }
+        {html
+          ? <li data-urgent className={css(styles.urgent)} dangerouslySetInnerHTML={{ __html: html }} onClick={() => markAsRead(id)}></li>
+          : null
+        }
+      </>
+    );
+  }
 }
 
-
-// function NotificationItem({ type = 'default', value, html, markAsRead, id = 0 }) {
-//     const element = html ?
-//         <li data-notification-type="urgent" dangerouslySetInnerHTML={html} onClick={() => { markAsRead(id) }}></li> :
-//         <li data-notification-type={type} onClick={() => { markAsRead(id) }}>{value}</li>;
-
-//     return element;
-// }
-
 NotificationItem.propTypes = {
-    type: PropTypes.string,
-    value: PropTypes.string,
-    html: PropTypes.shape({
-        __html: PropTypes.string,
-    }),
-    markAsRead: PropTypes.func,
-    id: PropTypes.number
+  __html: PropTypes.shape({
+    html: PropTypes.string
+  }),
+  type: PropTypes.string,
+  value: PropTypes.string
+  // markAsRead: ,
+  // key: 
 }
 
 NotificationItem.defaultProps = {
-    type: 'default',
-    id: 0,
-} //  will be removed in the future, use JS default parameters instead
+  type: 'default',
+}
+
+const styles = StyleSheet.create({
+  default: {
+    color: 'blue',
+    '@media (max-width: 900px)': {
+      borderBottom: '1px solid black',
+      listStyle: 'none',
+      fontSize: '20px',
+      padding: '10px 8px',
+    }
+  },
+  urgent: {
+    color: 'red',
+    '@media (max-width: 900px)': {
+      borderBottom: '1px solid black',
+      listStyle: 'none',
+      fontSize: '20px',
+      padding: '10px 8px',
+    }
+  }
+})
 
 export default NotificationItem;
