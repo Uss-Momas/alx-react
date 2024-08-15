@@ -32,6 +32,9 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.handleKeyboardPress = this.handleKeyboardPress.bind(this);
+        this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+        this.handleHideDrawer = this.handleHideDrawer.bind(this);
+        this.state = { displayDrawer: true };
     }
 
     handleKeyboardPress(event) {
@@ -49,8 +52,18 @@ class App extends Component {
         document.removeEventListener('keydown', this.handleKeyboardPress)
     }
 
-    render() {
+    handleDisplayDrawer() {
+        console.log("DISPLA");
+        this.setState({ displayDrawer: true });
+    }
 
+    handleHideDrawer() {
+        console.log("HIDE");
+        
+        this.setState({ displayDrawer: false });
+    }
+
+    render() {
         const listCourses = [
             { id: 1, name: 'ES6', credit: 60 },
             { id: 2, name: 'Webpack', credit: 20 },
@@ -67,7 +80,7 @@ class App extends Component {
             <div className={css(styles.App)}>
                 <div className={css(styles.headerContainer)}>
                     <Header />
-                    <Notifications listNotifications={listNotifications} />
+                    <Notifications listNotifications={listNotifications} displayDrawer={this.state.displayDrawer} handleDisplayDrawer={this.handleDisplayDrawer} handleHideDrawer={this.handleHideDrawer} />
                 </div>
                 <div className={css(styles['App-body'])}>
                     {
