@@ -4,7 +4,7 @@
         "check-lint": "lint [0-9]*.js",
         "test": "jest",
         "full-test": "./node_modules/.bin/eslint [0-9]*.js && jest",
-        "start": "nodemon --exec babel-node 1-main.js"
+        "start": "nodemon --exec babel-node"
     },
     "devDependencies": {
         "@babel/cli": "^7.24.8",
