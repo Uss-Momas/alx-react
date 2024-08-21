@@ -5,21 +5,44 @@ import { StyleSheet, css } from 'aphrodite';
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isLoggedIn: false };
+        this.state = { isLoggedIn: false, email: "", password: "", enableSubmit: false };
+        this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+        this.handleChangeEmail = this.handleChangeEmail.bind(this);
+        this.handleChangePassword = this.handleChangePassword.bind(this);
     }
 
+    handleLoginSubmit(e) {
+        e.preventDefault();
+        this.setState({ isLoggedIn: true });
+    }
+    handleChangeEmail(e) {
+        this.setState({ email: e.target.value });
+        if (this.state.email !== '' && this.state.password !== '') {
+            this.setState({ enableSubmit: true });
+        } else {
+            this.setState({ enableSubmit: false, });
+        }
+    }
+    handleChangePassword(e) {
+        this.setState({ password: e.target.value });
+        if (this.state.email !== '' && this.state.password !== '') {
+            this.setState({ enableSubmit: true });
+        } else {
+            this.setState({ enableSubmit: false, });
+        }
+    }
     render() {
         return (
             <>
                 <div className={css(styles.appBody, styles.small)}>
                     <h1>Log in to continue</h1>
                     <p>Login to access the full dashboard</p>
-                    <form action="" method="post">
+                    <form action="" onSubmit={this.handleLoginSubmit}>
                         <label htmlFor="email">Email: </label>
-                        <input className={css(styles.noBorder)} type="email" id="email" name="email" />
+                        <input className={css(styles.noBorder)} type="email" id="email" name="email" value={this.state.email} onChange={this.handleChangeEmail} />
                         <label htmlFor="password">Password: </label>
-                        <input className={css(styles.noBorder)} type="password" id="password" name="password" />
-                        <input type='submit' className={css(styles.yellowBorder)} value={"OK"} />
+                        <input value={this.state.password} className={css(styles.noBorder)} type="password" id="password" name="password" onChange={this.handleChangePassword} />
+                        <input type='submit' className={css(styles.yellowBorder)} value={"OK"} disabled={!this.state.enableSubmit} />
                     </form>
                 </div>
             </>
