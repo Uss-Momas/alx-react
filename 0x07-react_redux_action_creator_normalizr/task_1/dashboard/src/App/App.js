@@ -10,7 +10,7 @@ import CourseList from '../CourseList/CourseList';
 import PropTypes from 'prop-types';
 import { getLatestNotification } from '../utils/utils';
 import { AppContext, defaultUser } from './AppContext';
-import { getAllNotificationsByUser } from '../schema/notifications';
+import { getAllNotificationsByUser, normalizedData } from '../schema/notifications';
 
 class App extends React.Component {
 	constructor(props) {
@@ -84,6 +84,7 @@ class App extends React.Component {
 
 		const notifications = getAllNotificationsByUser('5debd764a7c57c7839d722e9');
 		console.log(notifications);
+		console.log(normalizedData);
 		
 		
 
